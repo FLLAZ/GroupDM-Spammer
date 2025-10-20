@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!----------------------------------------------------------------->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#a9ceec" />
+
+  <title>FLLAZ GroupDM Spammer</title>
+  <meta name="description" content="" />
+
+  <link rel="icon" href="https://i.ibb.co/39dXLvV3/Freeze-logo.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:site_name"   content="FLLAZ" />
+  <meta property="og:title"       content="GroupDM Spammer" />
+  <meta property="og:description" content="" />
+  <meta property="og:url"         content="" />
+  <meta property="og:image"       content="" />
+<!----------------------------------------------------------------->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #202225; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #5865f2; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #7289da; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg,#2f3136,#1e1f22);
+      color:#fff;
+      margin:0; padding:0;
+      display:flex; justify-content:center; align-items:center;
+      height:100vh;
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+    }
+    .card {
+      background:#36393f;
+      padding:32px;
+      border-radius:20px;
+      box-shadow:0 15px 35px rgba(0,0,0,.5);
+      width:100%; max-width:600px;
+      animation:fadeIn .8s ease;
+      overflow-y:auto; /* 横スクロールバーを消すためoverflow-xはhidden */
+      overflow-x:hidden;
+      max-height:95vh;
+    }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    h2 { color:#adb8ff; text-align:center; margin:0 0 24px; font-weight:600; }
+    label { display:block; margin-top:18px; font-size:14px; }
+    input[type="text"], input[type="password"], textarea {
+      width:100%; padding:10px; margin-top:6px;
+      border-radius:8px; border:none;
+      background:#202225; color:#fff;
+      font-family:monospace; resize:vertical;
+    }
+    textarea { overflow-y:auto; }
+    input[type="number"] {
+      padding:6px; margin-top:6px;
+      border-radius:8px; border:none;
+      background:#202225; color:#fff;
+      font-family:monospace; appearance:none;
+      width:80px;
+    }
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance:none; margin:0;
+    }
+    .row {
+      display:flex; gap:12px; align-items:center;
+    }
+    .row > * { flex:none; }
+    .row label,
+    .row .checkbox-container { margin-top:0; }
+    .checkbox-container {
+      display:flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:14px; user-select:none;
+      margin-top:6px;
+    }
+    .checkbox-container input {
+      appearance:none; width:36px; height:18px;
+      background:#4f545c; border-radius:18px;
+      position:relative; transition:background .3s ease;
+    }
+    .checkbox-container:hover input { background:#5a5f68; }
+    .checkbox-container input:focus {
+      outline:none; box-shadow:0 0 0 3px rgba(114,137,218,0.5);
+    }
+    .checkbox-container input::before {
+      content:''; position:absolute;
+      width:14px; height:14px; border-radius:50%;
+      background:#fff; top:2px; left:2px;
+      transition:transform .3s cubic-bezier(.68,-.55,.27,1.55);
+    }
+    .checkbox-container input:checked { background:#7289da; }
+    .checkbox-container input:checked::before {
+      transform:translateX(18px);
+    }
+    .checkbox-container span { transition:color .3s; }
+    .checkbox-container input:checked + span {
+      color:#adb8ff;
+    }
+    button.primary, button.secondary {
+      margin-top:12px; width:auto; min-width:140px; padding:7px 14px;
+      border:none; border-radius:10px;
+      font-weight:600; font-size:14px;
+      letter-spacing:.2px; cursor:pointer; position:relative;
+      overflow:hidden; transition:all .2s;
+    }
+    button.primary {
+      background:linear-gradient(135deg,#6d75ff,#5865f2);
+      color:#fff;
+      box-shadow:0 2px 8px rgba(88,101,242,.25),0 0 4px rgba(255,255,255,.08),inset 0 0 2px rgba(255,255,255,.12);
+    }
+    button.secondary {
+      background:linear-gradient(135deg,#e74c3c,#c0392b);
+      color:#fff;
+      box-shadow:0 2px 8px rgba(236,81,81,.25),0 0 4px rgba(255,255,255,.08),inset 0 0 2px rgba(255,255,255,.12);
+    }
+    button.disabled-btn {
+      background: #ccc !important;
+      color: #fff !important;
+      box-shadow: none !important;
+      cursor: not-allowed !important;
+    }
+    .button-container {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+  .file-input-wrapper {
+    position: relative;
+    margin-top: 6px;
+  }
+  .file-label {
+    display: inline-block;
+    padding: 10px 16px;
+    background-color: #6d75ff;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+  }
+  .file-label:hover {
+    background-color: #5865f2;
+  }
+  .file-name {
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 13px;
+    color: #aaa;
+  }
+  input[type="file"] {
+    display: none;
+  }
+    #logArea { margin-top:20px; padding:10px; height:120px; overflow-y:auto; background:#202225; border-radius:10px; font-family:monospace; font-size:12px; white-space:pre-wrap; resize: vertical;}
+    @media (max-width: 600px) {
+      .card {
+        padding: 16px;
+        max-width: 95%;
+        border-radius: 10px;
+      }
+      h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+      label {
+        font-size: 13px;
+        margin-top: 12px;
+      }
+      input[type="text"],
+      input[type="password"],
+      textarea {
+        padding: 8px;
+        font-size: 12px;
+      }
+      textarea {
+        height: auto;
+        min-height: 60px;
+      }
+      button.primary,
+      button.secondary {
+        padding: 10px;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 12px;
+      }
+      .button-container {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .checkbox-container {
+        font-size: 13px;
+        flex-direction: row;
+      }
+      .file-label {
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .file-name {
+        font-size: 12px;
+      }
+      #logArea {
+        height: 80px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Freeze☭DMグループスパム</h2>
+    <label for="token">TOKEN</label>
+    <div style="position:relative;">
+      <input type="password" id="token" placeholder="TOKENを入力" style="width:100%;padding-right:36px;">
+      <button type="button" id="toggleTokenBtn" aria-label="マスク切替" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; padding:0; margin:0; cursor:pointer; width:24px; height:24px; display:flex; align-items:center; justify-content:center; opacity:0.7;">
+        <span id="tokenMaskIcon">
+          <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+        </span>
+      </button>
+    </div>
+    <label for="userIds">ユーザーID（改行区切り）</label>
+    <textarea id="userIds" placeholder="例：123456789012345678"></textarea>
+    <label for="groupNames">グループ名（改行区切り）</label>
+    <textarea id="groupNames" placeholder="例：Group A"></textarea>
+    <label for="iconImage">グループアイコン画像</label>
+    <div class="file-input-wrapper row">
+      <label class="file-label">
+        ファイルを選択
+        <input type="file" id="iconImage" accept="image/*">
+      </label>
+      <span class="file-name" id="iconFileName"></span>
+      <div id="iconPreviewBox" style="display:flex;align-items:center;gap:8px;min-height:60px;width:100%;">
+        <img id="iconPreview" alt="アイコンプレビュー" style="display:none;max-width:60px;max-height:60px;border-radius:8px;flex-shrink:0;">
+        <button type="button" id="clearIconBtn" style="display:none;background:#e74c3c;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:13px;cursor:pointer;flex-shrink:0;">アイコン削除</button>
+        <span id="iconPreviewSpacer" style="flex:1 1 auto;"></span>
+      </div>
+    </div>
+    <div class="row" style="margin-top:18px;">
+      <button type="button" class="primary" id="createGroupBtn">作成開始</button>
+      <button type="button" class="secondary" id="stopCreateGroupBtn" disabled>停止</button>
+    </div>
+    <div class="checkbox-container">
+      <input type="checkbox" id="sendOnCreateToggle">
+      <span>グループ作成時にメッセージ送信</span>
+    </div>
+    <div class="row" style="margin-top:18px;">
+      <button type="button" class="primary" id="addGroupBtn">グループ追加開始</button>
+      <button type="button" class="secondary" id="stopAddGroupBtn" disabled>追加停止</button>
+    </div>
+    <div class="checkbox-container">
+      <input type="checkbox" id="sendOnAddToggle">
+      <span>グループ追加時にメッセージ送信</span>
+    </div>
+    <label for="sendMessage" style="margin-top:18px;">送信メッセージ</label>
+    <textarea id="sendMessage" placeholder="全DMグループに送るメッセージを入力"></textarea>
+    <!-- メッセージ一括送信ボタンと停止ボタン削除 -->
+    <div id="rateLimitBox" style="margin-top:10px;">
+      <div id="rateLimitCreation"></div>
+      <div id="rateLimitAddition"></div>
+    </div>
+    <!-- フレンド招待URL生成エリア（見出しを上に独立配置、余白調整） -->
+    <label class="invite-title" for="inviteUrlInput">フレンド追加URL生成</label>
+    <div class="invite-url-flat">
+      <button type="button" class="invite-btn-flat" id="createInviteBtn">作成</button>
+      <button type="button" class="invite-btn-flat" id="copyInviteBtn">コピー</button>
+      <input type="text" id="inviteUrlInput" placeholder="https://discord.gg/..." class="invite-input-flat" readonly tabindex="-1">
+    </div>
+    <div id="logArea" style="margin-top:20px;">ログがここに表示されます</div>
+  </div>
+  <!-- axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('createInviteBtn').addEventListener('click', async () => {
+        const token = getToken();
+        if (!token) {
+          alert('TOKENが必要です');
+          return;
+        }
+        document.getElementById('inviteUrlInput').value = '';
+        try {
+          const res = await axios.post(
+            'https://discord.com/api/v9/users/@me/invites',
+            { max_uses: 0, max_age: 0, temporary: false, unique: true },
+            { headers: { Authorization: token, 'Content-Type': 'application/json' } }
+          );
+          if (res.data && res.data.code) {
+            const url = `https://discord.gg/${res.data.code}`;
+            document.getElementById('inviteUrlInput').value = url;
+          } else {
+            alert('URL生成失敗');
+          }
+        } catch (e) {
+          alert('作成エラー: ' + (e.response?.data?.message || e.message));
+        }
+      });
+
+      document.getElementById('copyInviteBtn').addEventListener('click', () => {
+        const url = document.getElementById('inviteUrlInput').value;
+        if (!url) return;
+        navigator.clipboard.writeText(url);
+      });
+    });
+  </script>
+  <style>
+    .invite-title {
+      color: #adb8ff;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 2px;
+      display: block;
+      letter-spacing: 0.1em;
+      user-select: none;
+      pointer-events: none;
+    }
+    .invite-url-flat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 2px 0;
+      padding: 0;
+      max-width: 420px;
+      width: 100%;
+      min-width: 0;
+    }
+    .invite-btn-flat {
+      background: #5865f2;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      outline: none;
+      min-width: 44px;
+    }
+    .invite-btn-flat:hover {
+      background: #6d75ff;
+    }
+    .invite-input-flat {
+      flex: 1;
+      min-width: 120px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #23272a;
+      color: #fff;
+      font-size: 14px;
+      font-family: monospace;
+      outline: none;
+      transition: border 0.2s;
+      margin-left: 0;
+      user-select: none;
+      pointer-events: none;
+      cursor: default;
+    }
+    .invite-input-flat:focus {
+      border: 1px solid #6d75ff;
+    }
+    @media (max-width: 600px) {
+      .invite-title {
+        margin-top: 8px;
+        font-size: 13px;
+      }
+      .invite-url-flat {
+        flex-direction: column;
+        gap: 2px;
+        max-width: 98vw;
+        align-items: stretch;
+      }
+      .invite-input-flat, .invite-btn-flat {
+        width: 100%;
+        min-width: 0;
+        font-size: 12px;
+        margin-left: 0;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // --- Utility ---
+    /**
+     * AbortController の signal を監視できる中断可能な sleep
+     */
+    function abortableSleep(ms, signal) {
+      return new Promise(resolve => {
+        const id = setTimeout(resolve, ms);
+        signal.addEventListener('abort', () => {
+          clearTimeout(id);
+          resolve();
+        }, { once: true });
+      });
+    }
+
+    function updateLog(msg, isError=false) {
+      const area = document.getElementById('logArea');
+      // 時:分のみ表示（秒は表示しない）
+      const now = new Date();
+      const h = now.getHours();
+      const m = now.getMinutes();
+      const time = `${h}:${m.toString().padStart(2, '0')}`;
+      area.textContent += `【${time}】 ${msg}\n`;
+      area.scrollTop = area.scrollHeight;
+    }
+    function getToken() {
+      return document.getElementById('token').value.trim();
+    }
+    function getLines(id) {
+      return document.getElementById(id).value
+        .split('\n').map(l=>l.trim()).filter(l=>l);
+    }
+
+    // --- Storage Utility ---
+    const STORAGE_KEYS = {
+      token: 'dmtool_token',
+      userIds: 'dmtool_userIds',
+      groupNames: 'dmtool_groupNames',
+      sendMessage: 'dmtool_sendMessage',
+      iconImage: 'dmtool_iconImage',
+      sendOnCreate: 'dmtool_sendOnCreate',
+      sendOnAdd: 'dmtool_sendOnAdd'
+    };
+    function saveToStorage(key, value) {
+      try { localStorage.setItem(key, value); }
+      catch (e) {}
+    }
+    function loadFromStorage(key) {
+      return localStorage.getItem(key) || '';
+    }
+
+    // --- Icon Preview ---
+    function updateIconPreview() {
+      const b64 = loadFromStorage(STORAGE_KEYS.iconImage);
+      const img = document.getElementById('iconPreview');
+      const btn = document.getElementById('clearIconBtn');
+      const box = document.getElementById('iconPreviewBox');
+      const spacer = document.getElementById('iconPreviewSpacer');
+      if (b64) {
+        img.src = b64.startsWith('data:') ? b64 : 'data:image/png;base64,' + b64;
+        img.style.display = 'block';
+        btn.style.display = 'inline-block';
+        box.style.display = 'flex';
+        spacer.style.display = 'block';
+      } else {
+        img.removeAttribute('src');
+        img.style.display = 'none';
+        btn.style.display = 'none';
+        box.style.display = 'flex'; // 常にflex
+        spacer.style.display = 'block';
+      }
+      // ファイル選択欄の値もリセット
+      document.getElementById('iconImage').value = '';
+    }
+
+    // --- Restore on Load ---
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('token').value       = loadFromStorage(STORAGE_KEYS.token);
+      document.getElementById('userIds').value     = loadFromStorage(STORAGE_KEYS.userIds);
+      document.getElementById('groupNames').value  = loadFromStorage(STORAGE_KEYS.groupNames);
+      document.getElementById('sendMessage').value = loadFromStorage(STORAGE_KEYS.sendMessage);
+      updateIconPreview();
+      document.getElementById('sendOnCreateToggle').checked =
+        localStorage.getItem(STORAGE_KEYS.sendOnCreate) === 'true';
+      document.getElementById('sendOnAddToggle').checked =
+        localStorage.getItem(STORAGE_KEYS.sendOnAdd) === 'true';
+    });
+
+    // --- Input Save ---
+    document.getElementById('token').addEventListener('input', e =>
+      saveToStorage(STORAGE_KEYS.token, e.target.value.trim())
+    );
+    document.getElementById('userIds').addEventListener('input', e =>
+      saveToStorage(STORAGE_KEYS.userIds, e.target.value)
+    );
+    document.getElementById('groupNames').addEventListener('input', e =>
+      saveToStorage(STORAGE_KEYS.groupNames, e.target.value)
+    );
+    document.getElementById('sendMessage').addEventListener('input', e =>
+      saveToStorage(STORAGE_KEYS.sendMessage, e.target.value)
+    );
+
+    // --- Icon Upload & Clear ---
+    document.getElementById('iconImage').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) {
+        // 何も選択せずキャンセルした場合は何もしない（プレビューもストレージも変更しない）
+        updateIconPreview(); // ただしinput[type=file]の値はリセット
+        return;
+      }
+      const fr = new FileReader();
+      fr.onload = () => {
+        const dataUrl = fr.result;
+        const b64 = dataUrl.split(',')[1];
+        saveToStorage(STORAGE_KEYS.iconImage, b64);
+        updateIconPreview();
+      };
+      fr.readAsDataURL(file);
+    });
+    document.getElementById('clearIconBtn').addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEYS.iconImage);
+      document.getElementById('iconImage').value = '';
+      updateIconPreview();
+      updateLog('アイコンを削除しました');
+    });
+
+    // --- Toggle Save ---
+    document.getElementById('sendOnCreateToggle').addEventListener('change', e =>
+      localStorage.setItem(STORAGE_KEYS.sendOnCreate, e.target.checked)
+    );
+    document.getElementById('sendOnAddToggle').addEventListener('change', e =>
+      localStorage.setItem(STORAGE_KEYS.sendOnAdd, e.target.checked)
+    );
+
+    // --- Token Show/Hide (SVGアイコン切替) ---
+    document.getElementById('toggleTokenBtn').addEventListener('click', function() {
+      const t = document.getElementById('token');
+      const icon = document.getElementById('tokenMaskIcon');
+      if (t.type === 'password') {
+        t.type = 'text';
+        icon.innerHTML = '<svg id="icon-eye-off" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.06 10.06 0 0 1 12 20c-6 0-10-8-10-8a18.4 18.4 0 0 1 5.06-5.94"/><path d="M1 1l22 22"/><path d="M9.53 9.53A3 3 0 0 0 12 15a3 3 0 0 0 2.47-5.47"/><path d="M12 4c6 0 10 8 10 8a18.4 18.4 0 0 1-5.06 5.94"/></svg>';
+      } else {
+        t.type = 'password';
+        icon.innerHTML = '<svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>';
+      }
+    });
+
+    // --- Rate Limit Display ---
+    let creationIntervalId = null;
+    let additionIntervalId = null;
+
+    function updateRateLimitCreation(sec) {
+      const el = document.getElementById('rateLimitCreation');
+      if (creationIntervalId) clearInterval(creationIntervalId);
+      let remaining = sec;
+      el.textContent = `グループ作成のレートリミット：${remaining}秒`;
+      creationIntervalId = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+          clearInterval(creationIntervalId);
+          creationIntervalId = null;
+          el.textContent = '';
+        } else {
+          el.textContent = `グループ作成のレートリミット：${remaining}秒`;
+        }
+     }, 1000);
+    }
+
+    function clearRateLimitCreation() {
+      if (creationIntervalId) {
+        clearInterval(creationIntervalId);
+        creationIntervalId = null;
+      }
+      document.getElementById('rateLimitCreation').textContent = '';
+    }
+
+    function updateRateLimitAddition(sec) {
+      const el = document.getElementById('rateLimitAddition');
+      if (additionIntervalId) clearInterval(additionIntervalId);
+      let remaining = sec;
+      el.textContent = `グループ追加のレートリミット：${remaining}秒`;
+      additionIntervalId = setInterval(() => {
+        remaining--;
+        if (remaining <= 0) {
+          clearInterval(additionIntervalId);
+          additionIntervalId = null;
+          el.textContent = '';
+        } else {
+          el.textContent = `グループ追加のレートリミット：${remaining}秒`;
+        }
+      }, 1000);
+    }
+
+    function clearRateLimitAddition() {
+      if (additionIntervalId) {
+        clearInterval(additionIntervalId);
+        additionIntervalId = null;
+      }
+      document.getElementById('rateLimitAddition').textContent = '';
+    }
+
+
+
+    // --- safeRequest (429/500/504 リトライ＆AbortController対応) ---
+    async function safeRequest(requestFn, url, data, config, signal, updateRLFn) {
+      while (true) {
+        try {
+          const res = data != null
+            ? await requestFn(url, data, config)
+            : await requestFn(url, config);
+          return res;
+        } catch (e) {
+          if (signal.aborted) throw e;
+          const status = e.response?.status;
+          if (status === 429) {
+            const wait = (e.response.data.retry_after || 1) * 1000;
+            updateLog(`レートリミット: ${wait/1000}秒待機`);
+            updateRLFn(Math.ceil(wait/1000));
+            await abortableSleep(wait, signal);
+            updateRLFn(0);
+            continue;
+          }
+          if (status === 500) {
+            updateLog('サーバーエラー500: 30秒待機', true);
+            await abortableSleep(30000, signal);
+            continue;
+          }
+          if (status === 504) {
+            updateLog('サーバーエラー504: 10秒待機', true);
+            await abortableSleep(10000, signal);
+            continue;
+          }
+          if (status === 401) {
+            updateLog('認証エラー401：トークンが無効です。処理を停止します。', true);
+            throw e;
+          }
+          throw e;
+        }
+      }
+    }
+
+    // --- Controllers ---
+    let createController = null;
+    let addController    = null;
+    let sendController   = null;
+
+    // --- グループ作成処理 ---
+    async function createLoop(names, iconB64, signal) {
+      updateLog('グループ作成開始');
+      const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+      const msgTemplate = document.getElementById('sendMessage').value.trim();
+      const sendOnCreate = document.getElementById('sendOnCreateToggle').checked;
+
+      try {
+        while (!signal.aborted) {
+          for (let i = 0; i < 10 && !signal.aborted; i++) {
+            // ① チャネル作成
+            const res = await safeRequest(
+              axios.post,
+              'https://discord.com/api/v9/users/@me/channels',
+              { recipients: [] },
+              { headers: { Authorization: getToken(), 'Content-Type': 'application/json' }, signal },
+              signal,
+              updateRateLimitCreation
+            );
+            const cid = res.data.id;
+            updateLog(`作成：チャネル ${cid}`);
+
+            // ② 名前・アイコン設定
+            const body = iconB64
+              ? { name: pick(names), icon: `data:image/png;base64,${iconB64}` }
+              : { name: pick(names) };
+            await safeRequest(
+              axios.patch,
+              `https://discord.com/api/v9/channels/${cid}`,
+              body,
+              { headers: { Authorization: getToken(), 'Content-Type': 'application/json' }, signal },
+              signal,
+              updateRateLimitCreation
+            );
+            updateLog(`設定完了：${cid}`);
+
+            // ③ 作成時メッセージ送信
+            if (sendOnCreate && msgTemplate) {
+              await safeRequest(
+                axios.post,
+                `https://discord.com/api/v9/channels/${cid}/messages`,
+                { content: msgTemplate },
+                { headers: { Authorization: getToken(), 'Content-Type': 'application/json' }, signal },
+                signal,
+                updateRateLimitCreation
+              );
+              updateLog(`作成時送信：${cid}`);
+            }
+
+            await abortableSleep(0, signal);
+          }
+          if (signal.aborted) break;
+          updateLog('10件完了。10分待機');
+          await abortableSleep(10 * 60 * 1000, signal);
+        }
+      } catch (e) {
+        if (e.name === 'CanceledError') {
+          updateLog('グループ作成が中断されました');
+        } else {
+          updateLog(`作成エラー：${e.message}`, true);
+        }
+      } finally {
+        setCreateBtnState(false);
+        clearRateLimitCreation();
+        updateLog('グループ作成停止');
+      }
+    }
+
+    // 初期状態で停止ボタンを必ず無効化
+    setCreateBtnState(false);
+    setAddBtnState(false);
+
+    // ボタン状態切り替え関数
+    function setCreateBtnState(isRunning) {
+      const execBtn = document.getElementById('createGroupBtn');
+      const stopBtn = document.getElementById('stopCreateGroupBtn');
+      if (isRunning) {
+        execBtn.disabled = true;
+        execBtn.classList.add('disabled-btn');
+        stopBtn.disabled = false;
+        stopBtn.classList.remove('disabled-btn');
+      } else {
+        execBtn.disabled = false;
+        execBtn.classList.remove('disabled-btn');
+        stopBtn.disabled = true;
+        stopBtn.classList.add('disabled-btn');
+      }
+    }
+
+    document.getElementById('createGroupBtn').addEventListener('click', () => {
+      if (!getToken()) { updateLog('TOKENが必要です', true); return; }
+      let names = getLines('groupNames'); if (!names.length) names = ['Default'];
+      const iconB64 = loadFromStorage(STORAGE_KEYS.iconImage) || null;
+
+      createController = new AbortController();
+      clearRateLimitCreation();
+      document.getElementById('logArea').textContent = '';
+      setCreateBtnState(true);
+
+      createLoop(names, iconB64, createController.signal);
+    });
+    document.getElementById('stopCreateGroupBtn').addEventListener('click', () => {
+      if (createController) createController.abort();
+    });
+
+
+    // --- グループ追加処理 ---
+    async function addLoop(signal) {
+      updateLog('グループ追加開始');
+      const userIds = getLines('userIds');
+      const names   = getLines('groupNames').length ? getLines('groupNames') : ['Default'];
+      const iconB64 = loadFromStorage(STORAGE_KEYS.iconImage) || null;
+      const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+      const sendOnAdd   = document.getElementById('sendOnAddToggle').checked;
+      const msgTemplate = document.getElementById('sendMessage').value.trim();
+
+      try {
+        while (!signal.aborted) {
+          const res = await safeRequest(
+            axios.get,
+            'https://discord.com/api/v9/users/@me/channels',
+            null,
+            { headers: { Authorization: getToken() }, signal },
+            signal,
+            updateRateLimitAddition
+          );
+          const dms = res.data.filter(c => c.type === 3);
+          const remain = dms.filter(g => !g.recipients.some(r => userIds.includes(r.id)));
+          updateLog(`未参加グループ数：${remain.length}`);
+
+          for (let g of remain.slice(0,10)) {
+            if (signal.aborted) break;
+            const cid = g.id;
+            const uid = pick(userIds);
+
+            // ユーザー追加
+            await safeRequest(
+              axios.put,
+              `https://discord.com/api/v9/channels/${cid}/recipients/${uid}`,
+              {},
+              { headers: { Authorization: getToken() }, signal },
+              signal,
+              updateRateLimitAddition
+            );
+            updateLog(`ユーザー追加：${cid}`);
+
+            // 名前・アイコン設定
+            const body = iconB64
+              ? { name: pick(names), icon: `data:image/png;base64,${iconB64}` }
+              : { name: pick(names) };
+            await safeRequest(
+              axios.patch,
+              `https://discord.com/api/v9/channels/${cid}`,
+              body,
+              { headers: { Authorization: getToken(), 'Content-Type': 'application/json' }, signal },
+              signal,
+              updateRateLimitAddition
+            );
+            updateLog(`設定完了：${cid}`);
+
+            // 追加時メッセージ送信
+            if (sendOnAdd && msgTemplate) {
+              await safeRequest(
+                axios.post,
+                `https://discord.com/api/v9/channels/${cid}/messages`,
+                { content: msgTemplate },
+                { headers: { Authorization: getToken(), 'Content-Type': 'application/json' }, signal },
+                signal,
+                updateRateLimitAddition
+              );
+              updateLog(`追加時送信：${cid}`);
+            }
+
+            await abortableSleep(0, signal);
+          }
+
+          if (signal.aborted) break;
+          updateLog('2分待機');
+          await abortableSleep(2 * 60 * 1000, signal);
+        }
+      } catch (e) {
+        if (e.name === 'CanceledError') {
+          updateLog('グループ追加が中断されました');
+        } else {
+          updateLog(`追加エラー：${e.message}`, true);
+        }
+      } finally {
+        setAddBtnState(false);
+        clearRateLimitAddition();
+        updateLog('グループ追加停止');
+      }
+    }
+
+    // 初期状態で追加停止ボタンを無効化
+    document.getElementById('stopAddGroupBtn').disabled = true;
+    document.getElementById('addGroupBtn').disabled = false;
+
+    // ボタン状態切り替え関数
+    function setAddBtnState(isRunning) {
+      const execBtn = document.getElementById('addGroupBtn');
+      const stopBtn = document.getElementById('stopAddGroupBtn');
+      if (isRunning) {
+        execBtn.disabled = true;
+        execBtn.classList.add('disabled-btn');
+        stopBtn.disabled = false;
+        stopBtn.classList.remove('disabled-btn');
+      } else {
+        execBtn.disabled = false;
+        execBtn.classList.remove('disabled-btn');
+        stopBtn.disabled = true;
+        stopBtn.classList.add('disabled-btn');
+      }
+    }
+
+    document.getElementById('addGroupBtn').addEventListener('click', () => {
+      if (!getToken()) { updateLog('TOKENが必要です', true); return; }
+      addController = new AbortController();
+      clearRateLimitAddition();
+      document.getElementById('logArea').textContent = '';
+      setAddBtnState(true);
+
+      addLoop(addController.signal);
+    });
+    document.getElementById('stopAddGroupBtn').addEventListener('click', () => {
+      if (addController) addController.abort();
+    });
+  </script>
+</body>
+</html>
