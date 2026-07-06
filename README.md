@@ -1,5 +1,4 @@
 # FLLAZ GroupDM Spammer
-# FLLAZ WebRaider
 コードに興味がありますか？  
 FLLAZはあなたのようなエンジニアを探しています。  
 是非FLLAZにお越しください。https://fllaz.com  
